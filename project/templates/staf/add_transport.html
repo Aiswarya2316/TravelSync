@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Transport</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #fff;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1f1f1f;
+            padding: 15px 30px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .navbar img {
+            height: 40px;
+        }
+        .nav-links a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #ff4c4c;
+        }
+        .logout a {
+            color: #ff4c4c;
+            font-weight: bold;
+        }
+        .form-container {
+            max-width: 500px;
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.1);
+            margin: 100px auto;
+            text-align: center;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        .form-container h2 {
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            background: #333;
+            color: #fff;
+            font-size: 16px;
+        }
+        form input:focus, form select:focus, form textarea:focus {
+            outline: 2px solid #ffcc00;
+            background: #444;
+        }
+        button {
+            background: #ff4c4c;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        button:hover {
+            background: #ffcc00;
+            color: #121212;
+        }
+        footer {
+            background: #181818;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 50px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="../stafhome"><img src="../static/unnamed.png" alt="Logo"></a>
+        <div class="nav-links">
+            <a href="../add-tour">Add Package</a>
+            <a href="../view-tour">View Package</a>
+            <a href="../add-hotel">Add Hotels</a>
+            <a href="../view-hotel">View Hotels</a>
+            <a href="../add-transport">Add Transport</a>
+            <a href="../view-transport">View Transport</a>
+        </div>
+        <div class="logout">
+            <a href="../logout">Logout</a>
+        </div>
+    </nav>
+    
+    <!-- Form Section -->
+    <div class="form-container">
+        <h2><i class="fas fa-bus"></i> Add Transport</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit"><i class="fas fa-save"></i> Save Transport</button>
+        </form>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Your Company. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

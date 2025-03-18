@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Tour Package</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        nav {
+            width: 100%;
+            background: #111;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #ff4c4c;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+
+        .logout a {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin-top: 100px;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #ffcc00;
+        }
+
+        /* Form Inputs */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            background: #333;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        form input:focus,
+        form select:focus,
+        form textarea:focus {
+            outline: none;
+            border: 1px solid #ffcc00;
+        }
+
+        /* Submit Button */
+        button {
+            background: #ff4c4c;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: #ffcc00;
+            color: #111;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-links">
+            <a class="logo" href="../stafhome"><img src="../static/unnamed.png" alt="Logo"></a>
+            <a href="../add-tour">Add Package</a>
+            <a href="../view-tour">View Package</a>
+            <a href="../add-hotel">Add Hotels</a>
+            <a href="../view-hotel">View Hotels</a>
+            <a href="../add-transport">Add Transport</a>
+            <a href="../view-transport">View Transport</a>
+        </div>
+        <div class="logout">
+            <a href="../logout">Logout</a>
+        </div>
+    </nav>
+    
+    <!-- Form Section -->
+    <div class="form-container">
+        <h2>Add Tour Package</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Tour Package</button>
+        </form>
+    </div>
+</body>
+</html>
