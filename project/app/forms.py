@@ -88,3 +88,17 @@ class HotelForm(forms.ModelForm):
     class Meta:
         model = Hotel
         fields = '__all__'
+
+
+
+
+from django import forms
+from .models import Booking
+
+class BookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['tour_package', 'hotel', 'transport']
+
+
+

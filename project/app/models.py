@@ -67,3 +67,22 @@ class Hotel(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Booking(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    tour_package = models.ForeignKey(TourPackage, on_delete=models.SET_NULL, null=True, blank=True)
+    hotel = models.ForeignKey(Hotel, on_delete=models.SET_NULL, null=True, blank=True)
+    transport = models.ForeignKey(Transport, on_delete=models.SET_NULL, null=True, blank=True)
+    status = models.CharField(max_length=20, choices=[("Confirmed", "Confirmed"), ("Pending", "Pending"), ("Cancelled", "Cancelled")], default="Pending")
+    booking_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        if self.tour_package:
+            return f"Package: {self.tour_package.name} - {self.customer}"
+        elif self.hotel:
+            return f"Hotel: {self.hotel.name} - {self.customer}"
+        elif self.transport:
+            return f"Transport: {self.transport.TRANSPORT_TYPES} - {self.customer}"
+        return f"Booking - {self.customer}"
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Packages</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            font-family: 'Poppins', sans-serif;
+        }
+        .navbar {
+            background-color:rgb(50, 50, 50);
+            padding: 15px 50px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            margin-top: 70px;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .table th {
+            background-color: #495057;
+            color: #fff;
+            text-align: center;
+        }
+        .table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+        .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .btn-book {
+            background-color: #343a40;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .btn-book:hover {
+            background-color: #23272b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a href="../customerhome" class="navbar-brand">TravelSync</a>
+            <div class="navbar-nav">
+                <a href="../view-tour-packages" class="nav-link">Package</a>
+                <a href="../view-transports" class="nav-link">Transport</a>
+                <a href="../view-hotels" class="nav-link">Hotel</a>
+                <a href="../view-bookings" class="nav-link">My Bookings</a>
+                <a href="../logout" class="nav-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tour Packages Table -->
+    <div class="container">
+        <h2 class="text-center text-dark mb-4">Tour Packages</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Destination</th>
+                        <th>Duration (Days)</th>
+                        <th>Price (₹)</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Availability</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for package in data %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ package.name }}</td>
+                        <td>{{ package.destination }}</td>
+                        <td>{{ package.duration }}</td>
+                        <td>₹{{ package.price }}</td>
+                        <td>{{ package.start_date }}</td>
+                        <td>{{ package.end_date }}</td>
+                        <td>{{ package.availability }}</td>
+                        <td>
+                            <a href="{% url 'book_package' package.id %}" class="btn-book">Book Now</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="9" class="text-center text-danger">No Tour Packages Available</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

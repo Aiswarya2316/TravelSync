@@ -18,23 +18,25 @@
         }
 
         body {
-            background-color: #121212;
-            color: #fff;
+            background-color: #f0f8ff;
+            color: #333;
         }
 
         /* Navbar */
         .navbar {
-            background-color: #181818;
+            background-color: #004080;
             padding: 15px 50px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .navbar-brand img {
-            height: 40px;
+        .navbar-brand {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
         }
 
         .navbar-nav .nav-link {
-            color: #ff4c4c !important;
+            color: white !important;
             font-size: 16px;
             font-weight: bold;
             transition: 0.3s;
@@ -46,29 +48,29 @@
 
         .logout .btn {
             background-color: #ffcc00;
-            color: #121212;
+            color: #004080;
             font-weight: bold;
             transition: 0.3s;
         }
 
         .logout .btn:hover {
-            background-color: #ff4c4c;
-            color: white;
+            background-color: white;
+            color: #004080;
         }
 
         /* Main Form Container */
         .container {
             max-width: 500px;
             margin: 100px auto;
-            background: #1e1e1e;
+            background: white;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.1);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
         h2 {
-            color: #ffcc00;
+            color: #004080;
             margin-bottom: 20px;
         }
 
@@ -82,20 +84,20 @@
             width: 100%;
             padding: 12px;
             border-radius: 5px;
-            border: none;
-            background: #2a2a2a;
-            color: #fff;
+            border: 1px solid #ccc;
+            background: #f8f9fa;
             font-size: 16px;
+            color: #333;
         }
 
         input:focus, select:focus, textarea:focus {
-            outline: 2px solid #ffcc00;
-            background: #333;
+            outline: 2px solid #004080;
+            background: white;
         }
 
         button {
-            background: #ffcc00;
-            color: #121212;
+            background: #004080;
+            color: white;
             padding: 14px;
             font-size: 18px;
             font-weight: bold;
@@ -106,13 +108,13 @@
         }
 
         button:hover {
-            background: #ff4c4c;
-            color: white;
+            background: #ffcc00;
+            color: #004080;
         }
 
         /* Footer */
         footer {
-            background: #181818;
+            background: #004080;
             color: white;
             text-align: center;
             padding: 15px;
@@ -134,9 +136,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../stafhome">
-                <img src="../static/unnamed.png" alt="Logo">
-            </a>
+            <a class="navbar-brand" href="../stafhome">TravelSync</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>

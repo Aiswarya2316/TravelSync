@@ -113,6 +113,26 @@ def stafhome(request):
 def customerhome(request):
     return render(request,'customer/customerhome.html')
 
+from django.shortcuts import render
+from .models import Customer, Staf, Booking, TourPackage, Hotel, Transport
+
+def adminhome(request):
+    total_users = Customer.objects.count()
+    total_staff = Staf.objects.count()
+    total_bookings = Booking.objects.count()
+    total_packages = TourPackage.objects.count()
+    total_hotels = Hotel.objects.count()
+    total_transports = Transport.objects.count()
+
+    context = {
+        'total_users': total_users,
+        'total_staff': total_staff,
+        'total_bookings': total_bookings,
+        'total_packages': total_packages,
+        'total_hotels': total_hotels,
+        'total_transports': total_transports,
+    }
+    return render(request, 'admin/adminhome.html', context)
 
 
 
@@ -168,3 +188,139 @@ def view_transport(req):
 def view_hotel(req):
     data=Hotel.objects.all()
     return render(req,'staf/view_hotel.html',{'data':data})
+
+
+
+
+def viewtourpackage(req):
+    data=TourPackage.objects.all()
+    return render(req,'customer/viewtourpackage.html',{'data':data})
+
+def viewtransport(req):
+    data=Transport.objects.all()
+    return render(req,'customer/viewtransport.html',{'data':data})
+
+def viewhotel(req):
+    data=Hotel.objects.all()
+    return render(req,'customer/viewhotel.html',{'data':data})
+
+
+
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import TourPackage, Hotel, Transport, Booking, Customer
+from .forms import BookingForm
+
+def get_logged_in_customer(request):
+    """Utility function to fetch the logged-in customer"""
+    user_id = request.session.get("user_id")
+    if user_id:
+        try:
+            return Customer.objects.get(id=user_id)
+        except Customer.DoesNotExist:
+            return None
+    return None
+
+def book_package(request, package_id):
+    customer = get_logged_in_customer(request)
+    if not customer:
+        messages.error(request, "You must be logged in to book a package.")
+        return redirect("login")
+
+    tour_package = TourPackage.objects.get(id=package_id)
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            booking.customer = customer  # Assigning logged-in customer
+            booking.tour_package = tour_package
+            booking.save()
+            messages.success(request, "Package booked successfully!")
+            return redirect("view_bookings")
+    else:
+        form = BookingForm()
+    return render(request, "customer/book_package.html", {"form": form, "tour_package": tour_package})
+
+
+def book_hotel(request, hotel_id):
+    customer = get_logged_in_customer(request)
+    if not customer:
+        messages.error(request, "You must be logged in to book a hotel.")
+        return redirect("login")
+
+    hotel = Hotel.objects.get(id=hotel_id)
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            booking.customer = customer
+            booking.hotel = hotel  # Ensure only hotel is assigned
+            booking.tour_package = None  # Prevent package assignment
+            booking.transport = None
+            booking.save()
+            messages.success(request, "Hotel booked successfully!")
+            return redirect("view_bookings")
+    else:
+        form = BookingForm()
+    return render(request, "customer/book_hotel.html", {"form": form, "hotel": hotel})
+
+
+def book_transport(request, transport_id):
+    customer = get_logged_in_customer(request)
+    if not customer:
+        messages.error(request, "You must be logged in to book transport.")
+        return redirect("login")
+
+    transport = Transport.objects.get(id=transport_id)
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            booking.customer = customer
+            booking.transport = transport  # Ensure only transport is assigned
+            booking.tour_package = None
+            booking.hotel = None
+            booking.save()
+            messages.success(request, "Transport booked successfully!")
+            return redirect("view_bookings")
+    else:
+        form = BookingForm()
+    return render(request, "customer/book_transport.html", {"form": form, "transport": transport})
+
+
+def view_bookings(request):
+    customer = get_logged_in_customer(request)
+    if not customer:
+        messages.error(request, "You must be logged in to view bookings.")
+        return redirect("login")
+
+    bookings = Booking.objects.filter(customer=customer)
+    return render(request, "customer/view_bookings.html", {"bookings": bookings})
+
+
+
+
+
+from django.shortcuts import render
+from .models import TourPackage, Customer, Staf, Transport, Hotel
+
+def admin_view_packages(request):
+    packages = TourPackage.objects.all()
+    return render(request, 'admin/view_packages.html', {'packages': packages})
+
+def admin_view_users(request):
+    users = Customer.objects.all()
+    return render(request, 'admin/view_users.html', {'users': users})
+
+def admin_view_staffs(request):
+    staffs = Staf.objects.all()
+    return render(request, 'admin/view_staffs.html', {'staffs': staffs})
+
+def admin_view_transports(request):
+    transports = Transport.objects.all()
+    return render(request, 'admin/view_transports.html', {'transports': transports})
+
+def admin_view_hotels(request):
+    hotels = Hotel.objects.all()
+    return render(request, 'admin/view_hotels.html', {'hotels': hotels})

@@ -9,41 +9,45 @@
     <style>
         /* Custom Styles */
         body {
-            background-color: #f8f9fa;
+            background-color: #e3f2fd;
+            font-family: 'Arial', sans-serif;
         }
         .navbar {
-            background-color: #343a40;
+            background-color: #0d6efd;
         }
-        .navbar-brand img {
-            height: 40px;
+        .navbar-brand {
+            font-weight: bold;
+            color: #ffffff !important;
         }
-        .table th {
-            background-color: #212529;
-            color: #fff;
-        }
-        .table tbody tr:hover {
-            background-color: #f1f1f1;
+        .navbar-nav .nav-link {
+            color: #ffffff !important;
+            font-weight: 500;
         }
         .container {
             margin-top: 50px;
             background: #ffffff;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
         }
-        .table th, .table td {
-            text-align: center;
+        .table th {
+            background-color: #0d6efd;
+            color: #ffffff;
+        }
+        .table tbody tr:hover {
+            background-color: #f1f8ff;
+        }
+        .btn-danger {
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../stafhome">
-                <img src="../static/unnamed.png" alt="Logo">
-            </a>
+            <a class="navbar-brand" href="../stafhome">TravelSync</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -67,12 +71,12 @@
     <div class="container">
         <h2 class="text-center text-primary mb-4">Transport Details</h2>
         <table class="table table-bordered table-striped">
-            <thead class="table-dark">
+            <thead>
                 <tr>
                     <th>#</th>
-                    <th>Transport Name</th>
-                    <th>Type</th>
-                    <th>Capacity</th>
+                    <th>Mode</th>
+                    <th>Provider</th>
+                    <th>Availability</th>
                     <th>Price (₹)</th>
                 </tr>
             </thead>
@@ -80,9 +84,9 @@
                 {% for transport in data %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ transport.name }}</td>
-                    <td>{{ transport.type }}</td>
-                    <td>{{ transport.capacity }}</td>
+                    <td>{{ transport.mode }}</td>
+                    <td>{{ transport.provider }}</td>
+                    <td>{{ transport.availability }}</td>
                     <td>{{ transport.price }}</td>
                 </tr>
                 {% empty %}

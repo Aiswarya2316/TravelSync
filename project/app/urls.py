@@ -9,11 +9,28 @@ urlpatterns = [
     path("logout/", views.user_logout, name="logout"),
     path('stafhome/',views.stafhome,name='stafhome'),
     path('customerhome/',views.customerhome,name='customerhome'),
+    path('adminhome/',views.adminhome,name="adminhome"),
     path('add-tour/', views.add_tour_package, name='add_tour'),
     path('add-transport/', views.add_transport, name='add_transport'),
     path('add-hotel/', views.add_hotel, name='add_hotel'),
     path('view-tour/', views.view_tour_package, name='view_tour'),
     path('view-transport/', views.view_transport, name='view_transport'),
     path('view-hotel/', views.view_hotel, name='view_hotel'),
+    path('view-tour-packages/', views.viewtourpackage, name='view_tour_packages'),
+    path('view-transports/', views.viewtransport, name='view_transports'),
+    path('view-hotels/', views.viewhotel, name='view_hotels'),
+
+    path('book-package/<int:package_id>/', views.book_package, name='book_package'),
+    path('book-hotel/<int:hotel_id>/', views.book_hotel, name='book_hotel'),
+    path('book-transport/<int:transport_id>/', views.book_transport, name='book_transport'),
+
+    path('view-bookings/', views.view_bookings, name='view_bookings'),
+
+
+     path('adminpackages/', views.admin_view_packages, name='admin_view_packages'),
+    path('adminusers/', views.admin_view_users, name='admin_view_users'),
+    path('adminstaffs/', views.admin_view_staffs, name='admin_view_staffs'),
+    path('admintransports/', views.admin_view_transports, name='admin_view_transports'),
+    path('adminhotels/', views.admin_view_hotels, name='admin_view_hotels'),
 
 ]
