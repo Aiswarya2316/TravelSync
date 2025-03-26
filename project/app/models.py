@@ -28,6 +28,8 @@ class AdminReg(models.Model):
     def __str__(self):
         return self.name
     
+from django.db import models
+
 class TourPackage(models.Model):
     name = models.CharField(max_length=255)
     destination = models.CharField(max_length=255)
@@ -37,6 +39,7 @@ class TourPackage(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     availability = models.IntegerField(help_text="Number of slots available")
+    image = models.ImageField(upload_to='tour_packages/', null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -54,6 +57,7 @@ class Transport(models.Model):
     arrival = models.DateTimeField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     availability = models.IntegerField()
+    image = models.ImageField(upload_to='transport/', null=True, blank=True)
 
     def __str__(self):
         return f"{self.mode} - {self.provider}"
@@ -64,6 +68,7 @@ class Hotel(models.Model):
     rating = models.FloatField()
     price_per_night = models.DecimalField(max_digits=10, decimal_places=2)
     available_rooms = models.IntegerField()
+    image = models.ImageField(upload_to='hotels/', null=True, blank=True)
 
     def __str__(self):
         return self.name

@@ -93,6 +93,7 @@
                 <thead class="table-primary">
                     <tr>
                         <th>#</th>
+                        <th>Hotel Image</th>
                         <th>Hotel Name</th>
                         <th>Location</th>
                         <th>Rooms Available</th>
@@ -103,6 +104,13 @@
                     {% for hotel in data %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
+                        <td>
+                            {% if hotel.image %}
+                                <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid" width="100">
+                            {% else %}
+                                <span class="text-muted">No Image</span>
+                            {% endif %}
+                        </td>
                         <td>{{ hotel.name }}</td>
                         <td>{{ hotel.location }}</td>
                         <td>{{ hotel.available_rooms }}</td>
@@ -110,11 +118,12 @@
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="5" class="text-center text-danger">No Hotels Available</td>
+                        <td colspan="6" class="text-center text-danger">No Hotels Available</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            
         </div>
     </div>
 
