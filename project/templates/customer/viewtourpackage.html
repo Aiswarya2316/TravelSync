@@ -91,6 +91,7 @@
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Availability</th>
+                        <th>image</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -101,12 +102,22 @@
                         <td>{{ package.name }}</td>
                         <td>{{ package.destination }}</td>
                         <td>{{ package.duration }}</td>
-                        <td>₹{{ package.price }}</td>
+                        <td>{{ package.price }}</td>
                         <td>{{ package.start_date }}</td>
                         <td>{{ package.end_date }}</td>
                         <td>{{ package.availability }}</td>
                         <td>
-                            <a href="{% url 'book_package' package.id %}" class="btn-book">Book Now</a>
+                            {% if package.image %}
+                                <img src="{{ package.image.url }}" alt="Package Image" width="100" height="70" class="img-thumbnail">
+                            {% else %}
+                                <span class="text-muted">No Image</span>
+                            {% endif %}
+                        </td>                        
+                        <td>
+                            <form action="{% url 'delete_tour' package.id %}" method="post" onsubmit="return confirm('Are you sure?');">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
                         </td>
                     </tr>
                     {% empty %}
@@ -115,6 +126,7 @@
                     </tr>
                     {% endfor %}
                 </tbody>
+                
             </table>
         </div>
     </div>

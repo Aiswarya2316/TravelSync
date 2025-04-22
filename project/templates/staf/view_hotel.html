@@ -93,29 +93,37 @@
                 <thead class="table-primary">
                     <tr>
                         <th>#</th>
-                        <th>Hotel Image</th>
                         <th>Hotel Name</th>
                         <th>Location</th>
                         <th>Rooms Available</th>
                         <th>Price per Night (₹)</th>
+                        <th>Image</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for hotel in data %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>
-                            {% if hotel.image %}
-                                <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid" width="100">
-                            {% else %}
-                                <span class="text-muted">No Image</span>
-                            {% endif %}
-                        </td>
+                       
                         <td>{{ hotel.name }}</td>
                         <td>{{ hotel.location }}</td>
                         <td>{{ hotel.available_rooms }}</td>
                         <td>{{ hotel.price_per_night }}</td>
-                    </tr>
+                       
+                            <td>
+                                {% if hotel.image %}
+                                    <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid" width="100">
+                                {% else %}
+                                    <span class="text-muted">No Image</span>
+                                {% endif %}
+                            </td>
+                            
+                      
+                        <td>
+                            <a href="{% url 'delete_hotel' hotel.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>                    
                     {% empty %}
                     <tr>
                         <td colspan="6" class="text-center text-danger">No Hotels Available</td>

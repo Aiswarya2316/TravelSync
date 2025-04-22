@@ -143,10 +143,10 @@ from .forms import TourPackageForm, TransportForm, HotelForm
 # Add Tour Package
 def add_tour_package(request):
     if request.method == "POST":
-        form = TourPackageForm(request.POST)
+        form = TourPackageForm(request.POST, request.FILES)  # include request.FILES
         if form.is_valid():
             form.save()
-            return redirect('add_tour')  # Redirect to the same page after saving
+            return redirect('add_tour')
     else:
         form = TourPackageForm()
     return render(request, 'staf/add_tour_package.html', {'form': form})
@@ -154,7 +154,7 @@ def add_tour_package(request):
 # Add Transport Details
 def add_transport(request):
     if request.method == "POST":
-        form = TransportForm(request.POST)
+        form = TransportForm(request.POST, request.FILES)  # include request.FILES
         if form.is_valid():
             form.save()
             return redirect('add_transport')
@@ -165,16 +165,13 @@ def add_transport(request):
 # Add Hotel Details
 def add_hotel(request):
     if request.method == "POST":
-        form = HotelForm(request.POST)
+        form = HotelForm(request.POST, request.FILES)  # include request.FILES
         if form.is_valid():
             form.save()
             return redirect('add_hotel')
     else:
         form = HotelForm()
     return render(request, 'staf/add_hotel.html', {'form': form})
-
-
-
 
 
 def view_tour_package(req):
@@ -324,3 +321,24 @@ def admin_view_transports(request):
 def admin_view_hotels(request):
     hotels = Hotel.objects.all()
     return render(request, 'admin/view_hotels.html', {'hotels': hotels})
+
+
+
+from django.shortcuts import get_object_or_404
+
+def delete_tour_package(request, pk):
+    package = get_object_or_404(TourPackage, pk=pk)
+    if request.method == "POST":
+        package.delete()
+        return redirect('view_tour')  
+
+def delete_hotel(request, id):
+    hotel = get_object_or_404(Hotel, id=id)
+    hotel.delete()
+    return redirect('view_hotel') 
+
+def delete_transport(request, id):
+    transport = get_object_or_404(Transport, id=id)
+    if request.method == 'POST':
+        transport.delete()
+        return redirect('view_transport')

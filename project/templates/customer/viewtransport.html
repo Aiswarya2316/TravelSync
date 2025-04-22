@@ -85,10 +85,11 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Transport Name</th>
+                        <th>Mode</th>
                         <th>Provider</th>
                         <th>Availability</th>
                         <th>Price (₹)</th>
+                        <th>Image</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -96,20 +97,32 @@
                     {% for transport in data %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
+                       
                         <td>{{ transport.mode }}</td>
                         <td>{{ transport.provider }}</td>
                         <td>{{ transport.availability }}</td>
-                        <td>₹{{ transport.price }}</td>
+                        <td>{{ transport.price }}</td>
                         <td>
-                            <a href="{% url 'book_transport' transport.id %}" class="btn-book">Book Now</a>
+                            {% if transport.image %}
+                                <img src="{{ transport.image.url }}" alt="Transport Image" width="100">
+                            {% else %}
+                                <span class="text-muted">No Image</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form action="{% url 'delete-transport' transport.id %}" method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
                         </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="6" class="text-center text-danger">No Transport Data Available</td>
+                        <td colspan="7" class="text-center text-danger">No Transport Data Available</td>
                     </tr>
                     {% endfor %}
                 </tbody>
+                
             </table>
         </div>
     </div>
