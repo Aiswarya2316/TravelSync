@@ -150,15 +150,15 @@
                             </td>
                             
                       
-                        <td>
-                            <a href="{% url 'delete_hotel' hotel.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
-                        </td>
-                    </tr>                    
-                    {% empty %}
-                    <tr>
-                        <td colspan="6" class="text-center text-danger">No Hotels Available</td>
-                    </tr>
-                    {% endfor %}
+                            <td>
+                                <a href="{% url 'book_hotel' hotel.id %}" class="btn-book">Book Now</a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center text-danger">No Hotels Available</td>
+                        </tr>
+                        {% endfor %}
                 </tbody>
         </div>
     </div>

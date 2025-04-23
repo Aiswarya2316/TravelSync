@@ -114,10 +114,7 @@
                             {% endif %}
                         </td>                        
                         <td>
-                            <form action="{% url 'delete_tour' package.id %}" method="post" onsubmit="return confirm('Are you sure?');">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+                            <a href="{% url 'book_package' package.id %}" class="btn-book">Book Now</a>
                         </td>
                     </tr>
                     {% empty %}
